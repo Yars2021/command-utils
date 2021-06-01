@@ -35,31 +35,31 @@ public class RequestParser {
         }
     }
 
-    public String requestName(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException {
+    public String requestName(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException, InputInterruptedException {
         return new FieldParser().parseName(requestUserInput(message, consoleReader));
     }
 
-    public Coordinates requestCoordinates(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException {
+    public Coordinates requestCoordinates(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException, InputInterruptedException {
         return new FieldParser().parseCoordinates(requestUserInput(message, consoleReader));
     }
 
-    public Integer requestNaturalNumber(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException {
+    public Integer requestNaturalNumber(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException, InputInterruptedException {
         return new FieldParser().parseNaturalNumber(requestUserInput(message, consoleReader));
     }
 
-    public FormOfEducation requestFormOfEducation(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException {
+    public FormOfEducation requestFormOfEducation(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException, InputInterruptedException {
         return new FieldParser().parseFromOfEducation(requestUserInput(message, consoleReader));
     }
 
-    public Color requestHairColor(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException {
+    public Color requestHairColor(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException, InputInterruptedException {
         return new FieldParser().parseHairColor(requestUserInput(message, consoleReader));
     }
 
-    public Country requestNationality(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException {
+    public Country requestNationality(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException, InputInterruptedException {
         return new FieldParser().parseNationality(requestUserInput(message, consoleReader));
     }
 
-    public Location requestLocationCoordinates(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException {
+    public Location requestLocationCoordinates(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException, InputInterruptedException {
         return new FieldParser().parseLocationCoordinates(requestUserInput(message, consoleReader));
     }
 
