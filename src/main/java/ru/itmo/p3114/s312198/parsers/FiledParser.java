@@ -1,4 +1,4 @@
-package ru.itmo.p3114.s312198.utils;
+package ru.itmo.p3114.s312198.parsers;
 
 import ru.itmo.p3114.s312198.exceptions.InvalidInputException;
 import ru.itmo.p3114.s312198.structures.*;
