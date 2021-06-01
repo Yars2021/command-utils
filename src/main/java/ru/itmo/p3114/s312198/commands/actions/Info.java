@@ -2,12 +2,13 @@ package ru.itmo.p3114.s312198.commands.actions;
 
 import ru.itmo.p3114.s312198.commands.CommandResult;
 import ru.itmo.p3114.s312198.commands.Status;
+import ru.itmo.p3114.s312198.commands.markers.CollectionInteracting;
 import ru.itmo.p3114.s312198.structures.StudyGroup;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class Info extends AbstractCommand {
+public class Info extends AbstractCommand implements CollectionInteracting {
     public Info() {
         super("info", "", "information about the collection");
     }

@@ -94,6 +94,6 @@ public class Person implements Serializable {
                 "\t\tHeight: " + height + "\n" +
                 "\t\tHair color: " + hairColor + "\n" +
                 "\t\tNationality: " + nationality + "\n" +
-                "\t\tLocation: " + (location == null ? "-" : location.toReadableString());
+                "\t\tLocation:\n" + (location == null ? "-" : location.toReadableString());
     }
 }

@@ -34,12 +34,14 @@ public enum Country implements Serializable {
         return values.get(key);
     }
 
-    public String getValString() {
+    public static String getValString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Country country : Country.values()) {
-            stringBuilder.append(country.toString());
-            stringBuilder.append(" ");
+            if (country != UNDEFINED) {
+                stringBuilder.append(country.toString());
+                stringBuilder.append(" ");
+            }
         }
-        return stringBuilder.toString();
+        return stringBuilder.toString().trim();
     }
 }

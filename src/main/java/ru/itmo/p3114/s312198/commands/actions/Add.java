@@ -2,11 +2,13 @@ package ru.itmo.p3114.s312198.commands.actions;
 
 import ru.itmo.p3114.s312198.commands.CommandResult;
 import ru.itmo.p3114.s312198.commands.Status;
+import ru.itmo.p3114.s312198.commands.markers.CollectionInteracting;
+import ru.itmo.p3114.s312198.commands.markers.DatabaseInteracting;
 import ru.itmo.p3114.s312198.structures.StudyGroup;
 
 import java.util.ArrayList;
 
-public class Add extends AbstractComplexCommand {
+public class Add extends AbstractComplexCommand implements CollectionInteracting, DatabaseInteracting {
     public Add() {
         super("add", "{arg}", "Adds an element to the collection");
     }

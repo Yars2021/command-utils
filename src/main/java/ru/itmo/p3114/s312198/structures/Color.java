@@ -27,12 +27,14 @@ public enum Color implements Serializable {
         return values.get(key);
     }
 
-    public String getValString() {
+    public static String getValString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Color color : Color.values()) {
-            stringBuilder.append(color.toString());
-            stringBuilder.append(" ");
+            if (color != UNDEFINED) {
+                stringBuilder.append(color.toString());
+                stringBuilder.append(" ");
+            }
         }
-        return stringBuilder.toString();
+        return stringBuilder.toString().trim();
     }
 }

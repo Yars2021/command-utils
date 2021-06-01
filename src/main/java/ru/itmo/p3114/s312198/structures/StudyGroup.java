@@ -146,6 +146,6 @@ public class StudyGroup implements Serializable {
                 "\tShould be expelled: " + shouldBeExpelled + "\n" +
                 "\tTransferred students: " + transferredStudents + "\n" +
                 "\tForm of education: " + formOfEducation + "\n" +
-                "\tgroupAdmin: " + (groupAdmin == null ? "-" : groupAdmin.toReadableString());
+                "\tgroupAdmin:\n" + (groupAdmin == null ? "-" : groupAdmin.toReadableString());
     }
 }

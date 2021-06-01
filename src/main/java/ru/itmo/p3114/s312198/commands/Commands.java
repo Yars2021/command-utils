@@ -15,7 +15,10 @@ public enum Commands {
     HISTORY("history"),
     REMOVE_ALL_BY_SHOULD_BE_EXPELLED("remove_all_by_should_be_expelled"),
     REMOVE_ANY_BY_TRANSFERRED_STUDENTS("remove_any_by_transferred_students"),
-    PRINT_FIELD_ASCENDING_GROUP_ADMIN("print_field_ascending_group_admin");
+    PRINT_FIELD_ASCENDING_GROUP_ADMIN("print_field_ascending_group_admin"),
+    NOP("nop"),
+    MESSAGE("msg"),
+    PERMISSION("permission");
 
     private final String command;
 

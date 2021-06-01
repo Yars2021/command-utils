@@ -26,12 +26,14 @@ public enum FormOfEducation implements Serializable {
         return values.get(key);
     }
 
-    public String getValString() {
+    public static String getValString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (FormOfEducation formOfEducation : FormOfEducation.values()) {
-            stringBuilder.append(formOfEducation.toString());
-            stringBuilder.append(" ");
+            if (formOfEducation != UNDEFINED) {
+                stringBuilder.append(formOfEducation.toString());
+                stringBuilder.append(" ");
+            }
         }
-        return stringBuilder.toString();
+        return stringBuilder.toString().trim();
     }
 }
