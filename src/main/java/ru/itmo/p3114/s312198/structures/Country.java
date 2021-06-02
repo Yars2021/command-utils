@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public enum Country implements Serializable {
-    UNDEFINED(0L),
     AUSTRALIA(1L),
     BELARUS(2L),
     GABON(3L),
@@ -37,10 +36,8 @@ public enum Country implements Serializable {
     public static String getValString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Country country : Country.values()) {
-            if (country != UNDEFINED) {
-                stringBuilder.append(country.toString());
-                stringBuilder.append(" ");
-            }
+            stringBuilder.append(country.toString());
+            stringBuilder.append(" ");
         }
         return stringBuilder.toString().trim();
     }

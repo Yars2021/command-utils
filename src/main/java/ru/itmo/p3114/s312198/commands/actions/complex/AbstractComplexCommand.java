@@ -1,5 +1,6 @@
-package ru.itmo.p3114.s312198.commands.actions;
+package ru.itmo.p3114.s312198.commands.actions.complex;
 
+import ru.itmo.p3114.s312198.commands.actions.simple.AbstractCommand;
 import ru.itmo.p3114.s312198.structures.StudyGroup;
 
 abstract public class AbstractComplexCommand extends AbstractCommand {

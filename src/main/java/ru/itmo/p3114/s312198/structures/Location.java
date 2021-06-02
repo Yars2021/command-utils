@@ -51,14 +51,14 @@ public class Location implements Serializable {
     }
 
     public String toCSV() {
-        return    (x == null ? " " : x) +
-            "," + (y == null ? " " : y) +
-            "," + (z == null ? " " : z) +
-            "," + (name == null ? " " : name);
+        return    (x == null ? "" : x) +
+            "," + (y == null ? "" : y) +
+            "," + (z == null ? "" : z) +
+            "," + (name == null ? "" : name);
     }
 
     public String toReadableString() {
-        return  "\t\t\tCoordinates: {" + x + "; " + y + "; " + z + "}\n" +
+        return  "\t\t\tCoordinates: {" + (x == null ? "-" : x) + "; " + (y == null ? "-" : y) + "; " + (z == null ? "-" : z) + "}\n" +
                 "\t\t\tName: " + (name == null ? "-" : name);
     }
 }

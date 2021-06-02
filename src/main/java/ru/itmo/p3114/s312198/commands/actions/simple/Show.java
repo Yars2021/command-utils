@@ -1,7 +1,7 @@
-package ru.itmo.p3114.s312198.commands.actions;
+package ru.itmo.p3114.s312198.commands.actions.simple;
 
-import ru.itmo.p3114.s312198.commands.CommandResult;
-import ru.itmo.p3114.s312198.commands.Status;
+import ru.itmo.p3114.s312198.commands.results.CommandResult;
+import ru.itmo.p3114.s312198.commands.results.Status;
 import ru.itmo.p3114.s312198.commands.markers.CollectionInteracting;
 import ru.itmo.p3114.s312198.structures.StudyGroup;
 

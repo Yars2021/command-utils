@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Coordinates implements Serializable {
     private Long x;
-    private Double y; //Максимальное значение поля: 426, Поле не может быть null
+    private Double y;
 
     public Coordinates() {
     }
@@ -31,6 +31,6 @@ public class Coordinates implements Serializable {
     }
 
     public String toReadableString() {
-        return "{" + x + "; " + y + "}";
+        return "{" + (x == null ? "-" : x) + "; " + (y == null ? "-" : y) + "}";
     }
 }

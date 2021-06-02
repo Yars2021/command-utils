@@ -80,20 +80,20 @@ public class Person implements Serializable {
                 .addZ(null)
                 .addName(null)
                 .toLocation();
-        return    (id == null ? " " : id) +
-            "," + (name == null ? " " : name) +
-            "," + (height == null ? " " : height) +
-            "," + (hairColor == null ? " " : hairColor) +
-            "," + (nationality == null ? " " : nationality) +
+        return    (id == null ? "" : id) +
+            "," + (name == null ? "" : name) +
+            "," + (height == null ? "" : height) +
+            "," + (hairColor == null ? "" : hairColor) +
+            "," + (nationality == null ? "" : nationality) +
             "," + (location == null ? emptyLocation.toCSV() : location.toCSV());
     }
 
     public String toReadableString() {
-        return  "\t\tID: " + id + "\n" +
-                "\t\tName: " + name + "\n" +
-                "\t\tHeight: " + height + "\n" +
-                "\t\tHair color: " + hairColor + "\n" +
-                "\t\tNationality: " + nationality + "\n" +
-                "\t\tLocation:\n" + (location == null ? "-" : location.toReadableString());
+        return  "\t\tID: " + (id == null ? "-" : id) + "\n" +
+                "\t\tName: " + (name == null ? "-" : name) + "\n" +
+                "\t\tHeight: " + (height == null ? "-" : height) + "\n" +
+                "\t\tHair color: " + (hairColor == null ? "-" : hairColor) + "\n" +
+                "\t\tNationality: " + (nationality == null ? "-" : nationality) + "\n" +
+                "\t\tLocation:" + (location == null ? "-" : "\n" + location.toReadableString());
     }
 }

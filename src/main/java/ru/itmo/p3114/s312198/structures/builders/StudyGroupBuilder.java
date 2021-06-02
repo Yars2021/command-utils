@@ -25,6 +25,11 @@ public class StudyGroupBuilder {
         return this;
     }
 
+    public StudyGroupBuilder addOwner(String owner) {
+        studyGroup.setOwner(owner);
+        return this;
+    }
+
     public StudyGroupBuilder addCoordinates(Coordinates coordinates) {
         studyGroup.setCoordinates(coordinates);
         return this;

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public enum FormOfEducation implements Serializable {
-    UNDEFINED(0L),
     FULL_TIME_EDUCATION(1L),
     DISTANCE_EDUCATION(2L),
     EVENING_CLASSES(3L);
@@ -29,10 +28,8 @@ public enum FormOfEducation implements Serializable {
     public static String getValString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (FormOfEducation formOfEducation : FormOfEducation.values()) {
-            if (formOfEducation != UNDEFINED) {
-                stringBuilder.append(formOfEducation.toString());
-                stringBuilder.append(" ");
-            }
+            stringBuilder.append(formOfEducation.toString());
+            stringBuilder.append(" ");
         }
         return stringBuilder.toString().trim();
     }

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public enum Color implements Serializable {
-    UNDEFINED(0L),
     BLACK(1L),
     WHITE(2L),
     RED(3L),
@@ -30,10 +29,8 @@ public enum Color implements Serializable {
     public static String getValString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Color color : Color.values()) {
-            if (color != UNDEFINED) {
-                stringBuilder.append(color.toString());
-                stringBuilder.append(" ");
-            }
+            stringBuilder.append(color.toString());
+            stringBuilder.append(" ");
         }
         return stringBuilder.toString().trim();
     }

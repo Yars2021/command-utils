@@ -9,6 +9,7 @@ public class StudyGroup implements Serializable {
     private Long id;
     private Long creatorId;
     private String name;
+    private String owner;
     private Coordinates coordinates;
     private java.time.LocalDate creationDate;
     private Integer studentsCount;
@@ -20,12 +21,13 @@ public class StudyGroup implements Serializable {
     public StudyGroup() {
     }
 
-    public StudyGroup(Long id, Long creatorId, String name, Coordinates coordinates,
+    public StudyGroup(Long id, Long creatorId, String name, String owner, Coordinates coordinates,
                       LocalDate creationDate, Integer studentsCount, Integer shouldBeExpelled,
                       Integer transferredStudents, FormOfEducation formOfEducation, Person groupAdmin) {
         this.id = id;
         this.creatorId = creatorId;
         this.name = name;
+        this.owner = owner;
         this.coordinates = coordinates;
         this.creationDate = creationDate;
         this.studentsCount = studentsCount;
@@ -45,6 +47,10 @@ public class StudyGroup implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public void setCoordinates(Coordinates coordinates) {
@@ -87,6 +93,10 @@ public class StudyGroup implements Serializable {
         return name;
     }
 
+    public String getOwner() {
+        return owner;
+    }
+
     public Coordinates getCoordinates() {
         return coordinates;
     }
@@ -124,28 +134,31 @@ public class StudyGroup implements Serializable {
                 .addNationality(null)
                 .addLocation(null)
                 .toPerson();
-        return    (id == null ? " " : id) +
-            "," + (creatorId == null ? " " : creatorId) +
-            "," + (name == null ? " " : name) +
-            "," + (coordinates == null ? " " : coordinates) +
-            "," + (creationDate == null ? " " : creationDate) +
-            "," + (studentsCount == null ? " " : studentsCount) +
-            "," + (shouldBeExpelled == null ? " " : shouldBeExpelled) +
-            "," + (transferredStudents == null ? " " : transferredStudents) +
-            "," + (formOfEducation == null ? " " : formOfEducation) +
+        return    (id == null ? "" : id) +
+            "," + (creatorId == null ? "" : creatorId) +
+            "," + (name == null ? "" : name) +
+            "," + (owner == null ? "" : owner) +
+            "," + (coordinates == null || coordinates.getX() == null ? "" : coordinates.getX()) +
+            "," + (coordinates == null || coordinates.getY() == null ? "" : coordinates.getY()) +
+            "," + (creationDate == null ? "" : creationDate) +
+            "," + (studentsCount == null ? "" : studentsCount) +
+            "," + (shouldBeExpelled == null ? "" : shouldBeExpelled) +
+            "," + (transferredStudents == null ? "" : transferredStudents) +
+            "," + (formOfEducation == null ? "" : formOfEducation) +
             "," + (groupAdmin == null ? emptyPerson.toCSV() : groupAdmin.toCSV()) + ";";
     }
 
     public String toReadableString() {
-        return  "ID: " + id + "\n" +
-                "\tCreator ID: " + creatorId + "\n" +
-                "\tName: " + name + "\n" +
+        return  "ID: " + (id == null ? "-" : id) + "\n" +
+                "\tCreator ID: " + (creatorId == null ? "-" : creatorId) + "\n" +
+                "\tName: " + (name == null ? "-" : name) + "\n" +
+                "\tOwner: " + (owner == null ? "-" : owner) + "\n" +
                 "\tCoordinates: " + (coordinates == null ? "-" : coordinates.toReadableString()) + "\n" +
-                "\tCreation date: " + creationDate + "\n" +
-                "\tStudents count: " + studentsCount + "\n" +
-                "\tShould be expelled: " + shouldBeExpelled + "\n" +
-                "\tTransferred students: " + transferredStudents + "\n" +
-                "\tForm of education: " + formOfEducation + "\n" +
-                "\tgroupAdmin:\n" + (groupAdmin == null ? "-" : groupAdmin.toReadableString());
+                "\tCreation date: " + (creationDate == null ? "-" : creationDate) + "\n" +
+                "\tStudents count: " + (studentsCount == null ? "-" : studentsCount) + "\n" +
+                "\tShould be expelled: " + (shouldBeExpelled == null ? "-" : shouldBeExpelled) + "\n" +
+                "\tTransferred students: " + (transferredStudents == null ? "-" : transferredStudents) + "\n" +
+                "\tForm of education: " + (formOfEducation == null ? "-" : formOfEducation) + "\n" +
+                "\tGroup admin:" + (groupAdmin == null ? "-" : "\n" + groupAdmin.toReadableString());
     }
 }

@@ -1,6 +1,6 @@
-package ru.itmo.p3114.s312198.commands.actions;
+package ru.itmo.p3114.s312198.commands.actions.simple;
 
-import ru.itmo.p3114.s312198.commands.CommandResult;
+import ru.itmo.p3114.s312198.commands.results.CommandResult;
 import ru.itmo.p3114.s312198.structures.StudyGroup;
 
 import java.io.Serializable;
@@ -13,6 +13,7 @@ abstract public class AbstractCommand implements Serializable {
     protected String documentation;
     protected ArrayList<String> arguments;
     protected LinkedHashSet<StudyGroup> target;
+    protected String owner;
 
     public AbstractCommand(String command, String inputPattern, String documentation) {
         this.command = command;
@@ -28,12 +29,20 @@ abstract public class AbstractCommand implements Serializable {
         this.target = target;
     }
 
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
     public ArrayList<String> getArguments() {
         return arguments;
     }
 
     public LinkedHashSet<StudyGroup> getTarget() {
         return target;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 
     public String getCommand() {

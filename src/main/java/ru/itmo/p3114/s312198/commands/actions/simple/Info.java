@@ -1,7 +1,7 @@
-package ru.itmo.p3114.s312198.commands.actions;
+package ru.itmo.p3114.s312198.commands.actions.simple;
 
-import ru.itmo.p3114.s312198.commands.CommandResult;
-import ru.itmo.p3114.s312198.commands.Status;
+import ru.itmo.p3114.s312198.commands.results.CommandResult;
+import ru.itmo.p3114.s312198.commands.results.Status;
 import ru.itmo.p3114.s312198.commands.markers.CollectionInteracting;
 import ru.itmo.p3114.s312198.structures.StudyGroup;
 
@@ -25,6 +25,10 @@ public class Info extends AbstractCommand implements CollectionInteracting {
             if (target.size() == 0) {
                 output.add("Collection is empty");
             } else {
+                output.add("Collection size: " + target.size());
+                output.add("ID,CreatorID,Name,Owner,CoordinatesX,CoordinatesY,CreationDate,StudentsCount,ShouldBeExpelled," +
+                        "TransferredStudents,FormOfEducation,AdminID,AdminName,AdminHeight,AdminHairColor,AdminNationality,AdminLocationX," +
+                        "AdminLocationY,AdminLocationZ,AdminLocationName;");
                 output.addAll(target.stream().map(StudyGroup::toCSV).collect(Collectors.toCollection(ArrayList::new)));
             }
             return new CommandResult(Status.OK, output);

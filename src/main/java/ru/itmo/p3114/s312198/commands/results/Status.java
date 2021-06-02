@@ -1,4 +1,4 @@
-package ru.itmo.p3114.s312198.commands;
+package ru.itmo.p3114.s312198.commands.results;
 
 import java.io.Serializable;
 

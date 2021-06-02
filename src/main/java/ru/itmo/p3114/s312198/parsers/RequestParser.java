@@ -27,12 +27,7 @@ public class RequestParser {
     }
 
     public Boolean requestExtension(String message, ConsoleReader consoleReader) throws IOException {
-        System.out.println(message);
-        try {
-            return "Y".equalsIgnoreCase(consoleReader.readConsoleLine());
-        } catch (ConsoleException consoleException) {
-            return "Y".equalsIgnoreCase(consoleReader.readLine());
-        }
+        return "Y".equalsIgnoreCase(requestUserInput(message, consoleReader));
     }
 
     public String requestName(String message, ConsoleReader consoleReader) throws IOException, InvalidInputException, InputInterruptedException {
