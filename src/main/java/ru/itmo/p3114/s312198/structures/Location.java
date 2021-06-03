@@ -17,6 +17,12 @@ public class Location implements Serializable, CSVConvertible {
     private Float y;
     private Float z;
     private String name;
+    public static final Location emptyLocation = new LocationBuilder()
+            .addX(null)
+            .addY(null)
+            .addZ(null)
+            .addName(null)
+            .toLocation();
 
     public Location() {
     }

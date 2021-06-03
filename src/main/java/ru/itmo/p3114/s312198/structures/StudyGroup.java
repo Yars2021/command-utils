@@ -136,18 +136,7 @@ public class StudyGroup implements Serializable, CSVConvertible {
 
     @Override
     public String toCSV() {
-        Person emptyPerson = new PersonBuilder()
-                .addId(null)
-                .addName(null)
-                .addHeight(null)
-                .addHairColor(null)
-                .addNationality(null)
-                .addLocation(null)
-                .toPerson();
-        return    (id == null ? "" : id) +
-            "," + (creatorId == null ? "" : creatorId) +
-            "," + (name == null ? "" : name) +
-            "," + (owner == null ? "" : owner) +
+        return    (name == null ? "" : name) +
             "," + (coordinates == null || coordinates.getX() == null ? "" : coordinates.getX()) +
             "," + (coordinates == null || coordinates.getY() == null ? "" : coordinates.getY()) +
             "," + (creationDate == null ? "" : creationDate) +
@@ -155,7 +144,7 @@ public class StudyGroup implements Serializable, CSVConvertible {
             "," + (shouldBeExpelled == null ? "" : shouldBeExpelled) +
             "," + (transferredStudents == null ? "" : transferredStudents) +
             "," + (formOfEducation == null ? "" : formOfEducation) +
-            "," + (groupAdmin == null ? emptyPerson.toCSV() : groupAdmin.toCSV());
+            "," + (groupAdmin == null ? Person.emptyPerson.toCSV() : groupAdmin.toCSV());
     }
 
     @Override
@@ -167,33 +156,30 @@ public class StudyGroup implements Serializable, CSVConvertible {
         try {
             FieldParser fieldParser = new FieldParser();
             String[] values = csvParser.parseLine(csv);
-            setId(fieldParser.parseId(values[0]));
-            setCreatorId(fieldParser.parseId(values[1]));
-            setName(fieldParser.parseName(values[2]));
-            setOwner(fieldParser.parseName(values[3]));
-            setCoordinates(new Coordinates(fieldParser.parseStudyGroupX(values[4]), fieldParser.parseStudyGroupY(values[5])));
-            setCreationDate(fieldParser.parseDate(values[6]));
-            setStudentsCount(fieldParser.parseNaturalNumber(values[7]));
-            if (fieldParser.parseNaturalNumber(values[8]) > studentsCount) {
+            setName(fieldParser.parseName(values[0]));
+            setCoordinates(new Coordinates(fieldParser.parseStudyGroupX(values[1]), fieldParser.parseStudyGroupY(values[2])));
+            setCreationDate(fieldParser.parseDate(values[3]));
+            setStudentsCount(fieldParser.parseNaturalNumber(values[4]));
+            if (fieldParser.parseNaturalNumber(values[5]) > studentsCount) {
                 throw new InvalidCSVFormatException("ShouldBeExpelled value cannot be greater than StudentsCount");
             }
-            setShouldBeExpelled(fieldParser.parseNaturalNumber(values[8]));
-            setTransferredStudents(fieldParser.parseNaturalNumber(values[9]));
-            setFormOfEducation(fieldParser.parseFromOfEducation(values[10]));
+            setShouldBeExpelled(fieldParser.parseNaturalNumber(values[5]));
+            setTransferredStudents(fieldParser.parseNaturalNumber(values[6]));
+            setFormOfEducation(fieldParser.parseFromOfEducation(values[7]));
             try {
                 Person person = new PersonBuilder()
-                        .addId(fieldParser.parseId(values[11]))
-                        .addName(fieldParser.parseName(values[12]))
-                        .addHeight(fieldParser.parseNaturalNumber(values[13]))
-                        .addHairColor(fieldParser.parseOptionalHairColor(values[14]))
-                        .addNationality(fieldParser.parseOptionalNationality(values[15]))
+                        .addId(fieldParser.parseId(values[8]))
+                        .addName(fieldParser.parseName(values[9]))
+                        .addHeight(fieldParser.parseNaturalNumber(values[10]))
+                        .addHairColor(fieldParser.parseOptionalHairColor(values[11]))
+                        .addNationality(fieldParser.parseOptionalNationality(values[12]))
                         .toPerson();
                 try {
                     person.setLocation(new LocationBuilder()
-                            .addX(fieldParser.parseLocationCoordinate(values[16]))
-                            .addY(fieldParser.parseLocationCoordinate(values[17]))
-                            .addZ(fieldParser.parseLocationCoordinate(values[18]))
-                            .addName(fieldParser.parseOptionalName(values[19]))
+                            .addX(fieldParser.parseLocationCoordinate(values[13]))
+                            .addY(fieldParser.parseLocationCoordinate(values[14]))
+                            .addZ(fieldParser.parseLocationCoordinate(values[15]))
+                            .addName(fieldParser.parseOptionalName(values[16]))
                             .toLocation());
                 } catch (InvalidInputException invalidInputException) {
                     person.setLocation(null);
@@ -210,6 +196,10 @@ public class StudyGroup implements Serializable, CSVConvertible {
             return null;
         }
         return this;
+    }
+
+    public String toInfoLine() {
+        return id + ", " + creatorId + ", " + owner + ": " + toCSV();
     }
 
     public String toReadableString() {

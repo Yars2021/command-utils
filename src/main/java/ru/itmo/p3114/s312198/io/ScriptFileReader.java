@@ -1,6 +1,6 @@
 package ru.itmo.p3114.s312198.io;
 
-import ru.itmo.p3114.s312198.commands.actions.simple.AbstractCommand;
+import ru.itmo.p3114.s312198.commands.actions.AbstractCommand;
 import ru.itmo.p3114.s312198.exceptions.InvalidFileException;
 
 import java.io.*;

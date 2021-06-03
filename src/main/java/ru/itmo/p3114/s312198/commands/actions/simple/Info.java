@@ -1,5 +1,6 @@
 package ru.itmo.p3114.s312198.commands.actions.simple;
 
+import ru.itmo.p3114.s312198.commands.actions.AbstractCommand;
 import ru.itmo.p3114.s312198.commands.results.CommandResult;
 import ru.itmo.p3114.s312198.commands.results.Status;
 import ru.itmo.p3114.s312198.commands.markers.CollectionInteracting;
@@ -27,10 +28,10 @@ public class Info extends AbstractCommand implements CollectionInteracting {
                 output.add("Collection size: " + target.size());
                 output.add("Collection (in CSV format):");
                 output.add("");
-                output.add("ID,CreatorID,Name,Owner,CoordinatesX,CoordinatesY,CreationDate,StudentsCount,ShouldBeExpelled," +
+                output.add("ID,CreatorID,Owner: Name,CoordinatesX,CoordinatesY,CreationDate,StudentsCount,ShouldBeExpelled," +
                         "TransferredStudents,FormOfEducation,AdminID,AdminName,AdminHeight,AdminHairColor,AdminNationality,AdminLocationX," +
                         "AdminLocationY,AdminLocationZ,AdminLocationName");
-                output.addAll(target.stream().map(StudyGroup::toCSV).collect(Collectors.toCollection(ArrayList::new)));
+                output.addAll(target.stream().map(StudyGroup::toInfoLine).collect(Collectors.toCollection(ArrayList::new)));
             }
             return new CommandResult(Status.OK, output);
         }

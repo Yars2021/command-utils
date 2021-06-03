@@ -1,4 +1,4 @@
-package ru.itmo.p3114.s312198.commands.actions.simple;
+package ru.itmo.p3114.s312198.commands.actions;
 
 import ru.itmo.p3114.s312198.commands.results.CommandResult;
 import ru.itmo.p3114.s312198.structures.StudyGroup;

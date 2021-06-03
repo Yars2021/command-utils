@@ -7,6 +7,7 @@ import ru.itmo.p3114.s312198.exceptions.InvalidCSVFormatException;
 import ru.itmo.p3114.s312198.exceptions.InvalidInputException;
 import ru.itmo.p3114.s312198.parsers.FieldParser;
 import ru.itmo.p3114.s312198.structures.builders.LocationBuilder;
+import ru.itmo.p3114.s312198.structures.builders.PersonBuilder;
 import ru.itmo.p3114.s312198.structures.csv.CSVConvertible;
 
 import java.io.IOException;
@@ -19,6 +20,14 @@ public class Person implements Serializable, CSVConvertible {
     private Color hairColor;
     private Country nationality;
     private Location location;
+    public static final Person emptyPerson = new PersonBuilder()
+            .addId(null)
+            .addName(null)
+            .addHeight(null)
+            .addHairColor(null)
+            .addNationality(null)
+            .addLocation(Location.emptyLocation)
+            .toPerson();
 
     public Person() {
     }
@@ -83,18 +92,12 @@ public class Person implements Serializable, CSVConvertible {
 
     @Override
     public String toCSV() {
-        Location emptyLocation = new LocationBuilder()
-                .addX(null)
-                .addY(null)
-                .addZ(null)
-                .addName(null)
-                .toLocation();
         return    (id == null ? "" : id) +
             "," + (name == null ? "" : name) +
             "," + (height == null ? "" : height) +
             "," + (hairColor == null ? "" : hairColor) +
             "," + (nationality == null ? "" : nationality) +
-            "," + (location == null ? emptyLocation.toCSV() : location.toCSV());
+            "," + (location == null ? Location.emptyLocation.toCSV() : location.toCSV());
     }
 
     @Override

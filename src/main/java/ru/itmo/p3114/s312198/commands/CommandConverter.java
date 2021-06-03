@@ -1,7 +1,7 @@
 package ru.itmo.p3114.s312198.commands;
 
 import ru.itmo.p3114.s312198.commands.actions.complex.AbstractComplexCommand;
-import ru.itmo.p3114.s312198.commands.actions.simple.AbstractCommand;
+import ru.itmo.p3114.s312198.commands.actions.AbstractCommand;
 import ru.itmo.p3114.s312198.commands.actions.simple.Clear;
 import ru.itmo.p3114.s312198.commands.actions.simple.ExecuteScript;
 import ru.itmo.p3114.s312198.commands.actions.simple.Exit;
