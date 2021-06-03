@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Add extends AbstractComplexCommand implements CollectionInteracting, DatabaseInteracting {
     public Add() {
-        super("add", "{arg}", "Adds an element to the collection");
+        super("add", "{studyGroup}", "Adds an element to the collection");
     }
 
     @Override

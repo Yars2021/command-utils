@@ -32,11 +32,19 @@ public class CommandParser {
                 try {
                     validCommand = Commands.valueOf(input.trim().split("\\s")[0].toUpperCase(Locale.ROOT));
                 } catch (IllegalArgumentException illegalArgumentException) {
-                    return new RawCommandBuilder()
-                            .addCommand(Commands.NOP.getCommand())
-                            .addCommandType(CommandTypes.SIMPLE_COMMAND)
-                            .addArgumentLine("")
-                            .toRawCommand();
+                    if ("?".equals(input.trim().split("\\s")[0])) {
+                        return new RawCommandBuilder()
+                                .addCommand(Commands.HELP.getCommand())
+                                .addCommandType(CommandTypes.SIMPLE_COMMAND)
+                                .addArgumentLine("")
+                                .toRawCommand();
+                    } else {
+                        return new RawCommandBuilder()
+                                .addCommand(Commands.NOP.getCommand())
+                                .addCommandType(CommandTypes.SIMPLE_COMMAND)
+                                .addArgumentLine("")
+                                .toRawCommand();
+                    }
                 }
                 try {
                     simpleCommand = SimpleCommands.valueOf(validCommand.getCommand().toUpperCase(Locale.ROOT));

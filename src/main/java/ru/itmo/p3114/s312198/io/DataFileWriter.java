@@ -22,7 +22,7 @@ public class DataFileWriter implements AutoCloseable {
                             throw new InvalidFileException("Unable to create file");
                         }
                     } catch (SecurityException securityException) {
-                        throw new InvalidFileException("not enough rights to create " + path);
+                        throw new InvalidFileException("Not enough rights to create " + path);
                     }
                 }
                 bufferedWriter = new BufferedWriter(new FileWriter(file));
@@ -30,7 +30,7 @@ public class DataFileWriter implements AutoCloseable {
                 if (file.isDirectory()) {
                     throw new InvalidFileException(path + " is a directory");
                 } else {
-                    throw new InvalidFileException("not enough rights to access " + path);
+                    throw new InvalidFileException("Not enough rights to access " + path);
                 }
             }
         }

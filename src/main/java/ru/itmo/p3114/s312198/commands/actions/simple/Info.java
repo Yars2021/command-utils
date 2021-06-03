@@ -21,14 +21,15 @@ public class Info extends AbstractCommand implements CollectionInteracting {
             return new CommandResult(Status.FAILED, output);
         } else {
             output.add("Collection type: LinkedHashSet of StudyGroup");
-            output.add("Elements in CSV format:");
             if (target.size() == 0) {
                 output.add("Collection is empty");
             } else {
                 output.add("Collection size: " + target.size());
+                output.add("Collection (in CSV format):");
+                output.add("");
                 output.add("ID,CreatorID,Name,Owner,CoordinatesX,CoordinatesY,CreationDate,StudentsCount,ShouldBeExpelled," +
                         "TransferredStudents,FormOfEducation,AdminID,AdminName,AdminHeight,AdminHairColor,AdminNationality,AdminLocationX," +
-                        "AdminLocationY,AdminLocationZ,AdminLocationName;");
+                        "AdminLocationY,AdminLocationZ,AdminLocationName");
                 output.addAll(target.stream().map(StudyGroup::toCSV).collect(Collectors.toCollection(ArrayList::new)));
             }
             return new CommandResult(Status.OK, output);
