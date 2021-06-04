@@ -7,7 +7,6 @@ import ru.itmo.p3114.s312198.exceptions.InvalidCSVFormatException;
 import ru.itmo.p3114.s312198.exceptions.InvalidInputException;
 import ru.itmo.p3114.s312198.parsers.FieldParser;
 import ru.itmo.p3114.s312198.structures.builders.LocationBuilder;
-import ru.itmo.p3114.s312198.structures.builders.PersonBuilder;
 import ru.itmo.p3114.s312198.structures.csv.CSVConvertible;
 
 import java.io.IOException;
@@ -20,14 +19,7 @@ public class Person implements Serializable, CSVConvertible {
     private Color hairColor;
     private Country nationality;
     private Location location;
-    public static final Person emptyPerson = new PersonBuilder()
-            .addId(null)
-            .addName(null)
-            .addHeight(null)
-            .addHairColor(null)
-            .addNationality(null)
-            .addLocation(Location.emptyLocation)
-            .toPerson();
+    public static final Person EMPTY_PERSON = new Person(null, null, null, null, null, Location.EMPTY_LOCATION);
 
     public Person() {
     }
@@ -92,12 +84,11 @@ public class Person implements Serializable, CSVConvertible {
 
     @Override
     public String toCSV() {
-        return    (id == null ? "" : id) +
-            "," + (name == null ? "" : name) +
-            "," + (height == null ? "" : height) +
-            "," + (hairColor == null ? "" : hairColor) +
-            "," + (nationality == null ? "" : nationality) +
-            "," + (location == null ? Location.emptyLocation.toCSV() : location.toCSV());
+        return        (name == null ? "" : name) +
+                "," + (height == null ? "" : height) +
+                "," + (hairColor == null ? "" : hairColor) +
+                "," + (nationality == null ? "" : nationality) +
+                "," + (location == null ? Location.EMPTY_LOCATION.toCSV() : location.toCSV());
     }
 
     @Override
@@ -109,17 +100,16 @@ public class Person implements Serializable, CSVConvertible {
         try {
             FieldParser fieldParser = new FieldParser();
             String[] values = csvParser.parseLine(csv);
-            setId(fieldParser.parseId(values[0]));
-            setName(fieldParser.parseName(values[1]));
-            setHeight(fieldParser.parseNaturalNumber(values[2]));
-            setHairColor(fieldParser.parseOptionalHairColor(values[3]));
-            setNationality(fieldParser.parseOptionalNationality(values[4]));
+            setName(fieldParser.parseName(values[0]));
+            setHeight(fieldParser.parseNaturalNumber(values[1]));
+            setHairColor(fieldParser.parseOptionalHairColor(values[2]));
+            setNationality(fieldParser.parseOptionalNationality(values[3]));
             try {
                 setLocation(new LocationBuilder()
-                        .addX(fieldParser.parseLocationCoordinate(values[5]))
-                        .addY(fieldParser.parseLocationCoordinate(values[6]))
-                        .addZ(fieldParser.parseLocationCoordinate(values[7]))
-                        .addName(fieldParser.parseOptionalName(values[8]))
+                        .addX(fieldParser.parseLocationCoordinate(values[4]))
+                        .addY(fieldParser.parseLocationCoordinate(values[5]))
+                        .addZ(fieldParser.parseLocationCoordinate(values[6]))
+                        .addName(fieldParser.parseOptionalName(values[7]))
                         .toLocation());
             } catch (InvalidInputException invalidInputException) {
                 setLocation(null);
@@ -135,7 +125,7 @@ public class Person implements Serializable, CSVConvertible {
     }
 
     public String toReadableShiftedString() {
-        return  "\t\tID: " + (id == null ? "-" : id) + "\n" +
+        return "\t\tID: " + (id == null ? "-" : id) + "\n" +
                 "\t\tName: " + (name == null ? "-" : name) + "\n" +
                 "\t\tHeight: " + (height == null ? "-" : height) + "\n" +
                 "\t\tHair color: " + (hairColor == null ? "-" : hairColor) + "\n" +
@@ -144,7 +134,7 @@ public class Person implements Serializable, CSVConvertible {
     }
 
     public String toReadableString() {
-        return  "ID: " + (id == null ? "-" : id) + "\n" +
+        return "ID: " + (id == null ? "-" : id) + "\n" +
                 "\tName: " + (name == null ? "-" : name) + "\n" +
                 "\tHeight: " + (height == null ? "-" : height) + "\n" +
                 "\tHair color: " + (hairColor == null ? "-" : hairColor) + "\n" +

@@ -144,7 +144,7 @@ public class StudyGroup implements Serializable, CSVConvertible {
             "," + (shouldBeExpelled == null ? "" : shouldBeExpelled) +
             "," + (transferredStudents == null ? "" : transferredStudents) +
             "," + (formOfEducation == null ? "" : formOfEducation) +
-            "," + (groupAdmin == null ? Person.emptyPerson.toCSV() : groupAdmin.toCSV());
+            "," + (groupAdmin == null ? Person.EMPTY_PERSON.toCSV() : groupAdmin.toCSV());
     }
 
     @Override
@@ -168,18 +168,17 @@ public class StudyGroup implements Serializable, CSVConvertible {
             setFormOfEducation(fieldParser.parseFromOfEducation(values[7]));
             try {
                 Person person = new PersonBuilder()
-                        .addId(fieldParser.parseId(values[8]))
-                        .addName(fieldParser.parseName(values[9]))
-                        .addHeight(fieldParser.parseNaturalNumber(values[10]))
-                        .addHairColor(fieldParser.parseOptionalHairColor(values[11]))
-                        .addNationality(fieldParser.parseOptionalNationality(values[12]))
+                        .addName(fieldParser.parseName(values[8]))
+                        .addHeight(fieldParser.parseNaturalNumber(values[9]))
+                        .addHairColor(fieldParser.parseOptionalHairColor(values[10]))
+                        .addNationality(fieldParser.parseOptionalNationality(values[11]))
                         .toPerson();
                 try {
                     person.setLocation(new LocationBuilder()
-                            .addX(fieldParser.parseLocationCoordinate(values[13]))
-                            .addY(fieldParser.parseLocationCoordinate(values[14]))
-                            .addZ(fieldParser.parseLocationCoordinate(values[15]))
-                            .addName(fieldParser.parseOptionalName(values[16]))
+                            .addX(fieldParser.parseLocationCoordinate(values[12]))
+                            .addY(fieldParser.parseLocationCoordinate(values[13]))
+                            .addZ(fieldParser.parseLocationCoordinate(values[14]))
+                            .addName(fieldParser.parseOptionalName(values[15]))
                             .toLocation());
                 } catch (InvalidInputException invalidInputException) {
                     person.setLocation(null);

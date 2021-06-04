@@ -48,4 +48,13 @@ public class RemoveAllByShouldBeExpelled extends AbstractCommand implements Coll
             }
         }
     }
+
+    @Override
+    public AbstractCommand clone() {
+        RemoveAllByShouldBeExpelled commandClone = new RemoveAllByShouldBeExpelled();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
+    }
 }

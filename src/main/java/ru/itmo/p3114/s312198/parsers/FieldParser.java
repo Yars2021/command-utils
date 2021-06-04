@@ -49,7 +49,7 @@ public class FieldParser {
                 throw new InvalidInputException("Invalid line format");
             } else {
                 try {
-                    double y = Double.parseDouble(split[1]);
+                    Double y = Double.parseDouble(split[1]);
                     if (y < 0 || y > 426) {
                         throw new InvalidInputException("Value is out of bounds");
                     } else {
@@ -81,7 +81,7 @@ public class FieldParser {
             throw new InputInterruptedException();
         } else {
             try {
-                double y = Double.parseDouble(input);
+                Double y = Double.parseDouble(input);
                 if (y < 0 || y > 426) {
                     throw new InvalidInputException("Value is out of bounds");
                 } else {
@@ -110,8 +110,25 @@ public class FieldParser {
             throw new InputInterruptedException();
         } else {
             try {
-                int num = Integer.parseInt(input.trim());
+                Integer num = Integer.parseInt(input.trim());
                 if (num < 0) {
+                    throw new InvalidInputException("Value is out of bounds");
+                } else {
+                    return num;
+                }
+            } catch (NumberFormatException formatExc) {
+                throw new InvalidInputException("Invalid number format");
+            }
+        }
+    }
+
+    public Integer parseCappedNaturalNumber(String input, Integer maxValue) throws InvalidInputException, InputInterruptedException {
+        if (input == null) {
+            throw new InputInterruptedException();
+        } else {
+            try {
+                Integer num = Integer.parseInt(input.trim());
+                if (num < 0 || num > maxValue) {
                     throw new InvalidInputException("Value is out of bounds");
                 } else {
                     return num;

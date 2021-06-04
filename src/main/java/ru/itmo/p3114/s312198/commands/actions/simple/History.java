@@ -16,4 +16,13 @@ public class History extends AbstractCommand {
         ArrayList<String> output = new ArrayList<>();
         return new CommandResult(Status.OK, output);
     }
+
+    @Override
+    public AbstractCommand clone() {
+        History commandClone = new History();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
+    }
 }

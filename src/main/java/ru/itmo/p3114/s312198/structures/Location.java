@@ -6,7 +6,6 @@ import ru.itmo.p3114.s312198.exceptions.InputInterruptedException;
 import ru.itmo.p3114.s312198.exceptions.InvalidCSVFormatException;
 import ru.itmo.p3114.s312198.exceptions.InvalidInputException;
 import ru.itmo.p3114.s312198.parsers.FieldParser;
-import ru.itmo.p3114.s312198.structures.builders.LocationBuilder;
 import ru.itmo.p3114.s312198.structures.csv.CSVConvertible;
 
 import java.io.IOException;
@@ -17,12 +16,7 @@ public class Location implements Serializable, CSVConvertible {
     private Float y;
     private Float z;
     private String name;
-    public static final Location emptyLocation = new LocationBuilder()
-            .addX(null)
-            .addY(null)
-            .addZ(null)
-            .addName(null)
-            .toLocation();
+    public static final Location EMPTY_LOCATION = new Location(null, null, null, null);
 
     public Location() {
     }

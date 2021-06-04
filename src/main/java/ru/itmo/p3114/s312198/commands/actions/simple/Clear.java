@@ -1,6 +1,7 @@
 package ru.itmo.p3114.s312198.commands.actions.simple;
 
 import ru.itmo.p3114.s312198.commands.actions.AbstractCommand;
+import ru.itmo.p3114.s312198.commands.actions.complex.Add;
 import ru.itmo.p3114.s312198.commands.markers.CollectionInteracting;
 import ru.itmo.p3114.s312198.commands.markers.DatabaseInteracting;
 import ru.itmo.p3114.s312198.commands.results.CommandResult;
@@ -30,5 +31,14 @@ public class Clear extends AbstractCommand implements CollectionInteracting, Dat
                 return new CommandResult(Status.OK, output);
             }
         }
+    }
+
+    @Override
+    public AbstractCommand clone() {
+        Clear commandClone = new Clear();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
     }
 }

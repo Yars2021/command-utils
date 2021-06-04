@@ -16,4 +16,13 @@ public class ExecuteScript extends AbstractCommand {
         ArrayList<String> output = new ArrayList<>();
         return new CommandResult(Status.OK, output);
     }
+
+    @Override
+    public AbstractCommand clone() {
+        ExecuteScript commandClone = new ExecuteScript();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
+    }
 }

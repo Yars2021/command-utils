@@ -29,4 +29,13 @@ public class PrintFieldAscendingGroupAdmin extends AbstractCommand implements Co
             return new CommandResult(Status.OK, output);
         }
     }
+
+    @Override
+    public AbstractCommand clone() {
+        PrintFieldAscendingGroupAdmin commandClone = new PrintFieldAscendingGroupAdmin();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
+    }
 }

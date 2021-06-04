@@ -36,4 +36,13 @@ public class Info extends AbstractCommand implements CollectionInteracting {
             return new CommandResult(Status.OK, output);
         }
     }
+
+    @Override
+    public AbstractCommand clone() {
+        Info commandClone = new Info();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
+    }
 }

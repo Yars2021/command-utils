@@ -16,4 +16,13 @@ public class Nop extends AbstractCommand {
         ArrayList<String> output = new ArrayList<>();
         return new CommandResult(Status.OK, output);
     }
+
+    @Override
+    public AbstractCommand clone() {
+        Nop commandClone = new Nop();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
+    }
 }

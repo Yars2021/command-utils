@@ -46,4 +46,13 @@ public class Permission extends AbstractCommand implements CollectionInteracting
             }
         }
     }
+
+    @Override
+    public AbstractCommand clone() {
+        Permission commandClone = new Permission();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
+    }
 }

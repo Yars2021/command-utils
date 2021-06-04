@@ -30,4 +30,13 @@ public class Show extends AbstractCommand implements CollectionInteracting {
             return new CommandResult(Status.OK, output);
         }
     }
+
+    @Override
+    public AbstractCommand clone() {
+        Show commandClone = new Show();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
+    }
 }

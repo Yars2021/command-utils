@@ -11,7 +11,7 @@ abstract public class AbstractCommand implements Serializable {
     protected String command;
     protected String inputPattern;
     protected String documentation;
-    protected ArrayList<String> arguments;
+    protected ArrayList<String> arguments = new ArrayList<>();
     protected LinkedHashSet<StudyGroup> target;
     protected String owner;
 
@@ -58,4 +58,6 @@ abstract public class AbstractCommand implements Serializable {
     }
 
     abstract public CommandResult execute();
+
+    abstract public AbstractCommand clone();
 }

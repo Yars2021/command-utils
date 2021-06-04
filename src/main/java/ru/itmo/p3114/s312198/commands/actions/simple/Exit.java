@@ -16,4 +16,13 @@ public class Exit extends AbstractCommand {
         ArrayList<String> output = new ArrayList<>();
         return new CommandResult(Status.OK, output);
     }
+
+    @Override
+    public AbstractCommand clone() {
+        Exit commandClone = new Exit();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
+    }
 }

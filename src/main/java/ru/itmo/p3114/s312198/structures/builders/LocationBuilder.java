@@ -20,6 +20,13 @@ public class LocationBuilder {
         return this;
     }
 
+    public LocationBuilder addLocationCoordinates(Location location) {
+        this.location.setX(location.getX());
+        this.location.setY(location.getY());
+        this.location.setZ(location.getZ());
+        return this;
+    }
+
     public LocationBuilder addName(String name) {
         location.setName(name);
         return this;

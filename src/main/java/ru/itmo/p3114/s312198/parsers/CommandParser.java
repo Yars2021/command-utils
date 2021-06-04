@@ -1,85 +1,44 @@
 package ru.itmo.p3114.s312198.parsers;
 
-import ru.itmo.p3114.s312198.commands.raw.RawCommand;
-import ru.itmo.p3114.s312198.commands.raw.RawCommandBuilder;
-import ru.itmo.p3114.s312198.commands.types.CommandTypes;
-import ru.itmo.p3114.s312198.commands.types.Commands;
-import ru.itmo.p3114.s312198.commands.types.ComplexCommands;
-import ru.itmo.p3114.s312198.commands.types.SimpleCommands;
+import ru.itmo.p3114.s312198.commands.CommandHashMap;
+import ru.itmo.p3114.s312198.commands.CommandRecord;
+import ru.itmo.p3114.s312198.commands.actions.AbstractCommand;
+import ru.itmo.p3114.s312198.exceptions.NoSuchCommandException;
 
-import java.util.Locale;
+import java.util.Collections;
 
 public class CommandParser {
-    public RawCommand parseUserInput(String input) {
+    public String parseCommandName(String input, CommandHashMap validCommands) throws NoSuchCommandException {
         if (input == null) {
-            return new RawCommandBuilder()
-                    .addCommand(Commands.EXIT.getCommand())
-                    .addCommandType(CommandTypes.SIMPLE_COMMAND)
-                    .addArgumentLine("")
-                    .toRawCommand();
+            return "exit";
         } else {
-            if (input.trim().split("\\s").length == 0) {
-                return new RawCommandBuilder()
-                        .addCommand(Commands.NOP.getCommand())
-                        .addCommandType(CommandTypes.SIMPLE_COMMAND)
-                        .addArgumentLine("")
-                        .toRawCommand();
+            if (input.trim().split("\\s+?").length == 0) {
+                return "nop";
             } else {
-                Commands validCommand;
-                SimpleCommands simpleCommand;
-                ComplexCommands complexCommand;
-                String argumentLine;
-                try {
-                    validCommand = Commands.valueOf(input.trim().split("\\s")[0].toUpperCase(Locale.ROOT));
-                } catch (IllegalArgumentException illegalArgumentException) {
-                    if ("?".equals(input.trim().split("\\s")[0])) {
-                        return new RawCommandBuilder()
-                                .addCommand(Commands.HELP.getCommand())
-                                .addCommandType(CommandTypes.SIMPLE_COMMAND)
-                                .addArgumentLine("")
-                                .toRawCommand();
+                if ("?".equals(input.trim().split("\\s+?")[0])) {
+                    return "help";
+                } else {
+                    if (validCommands.containsName(input.trim().split("\\s+?")[0])) {
+                        return input.trim().split("\\s+?")[0];
                     } else {
-                        return new RawCommandBuilder()
-                                .addCommand(Commands.NOP.getCommand())
-                                .addCommandType(CommandTypes.SIMPLE_COMMAND)
-                                .addArgumentLine("")
-                                .toRawCommand();
-                    }
-                }
-                try {
-                    simpleCommand = SimpleCommands.valueOf(validCommand.getCommand().toUpperCase(Locale.ROOT));
-                    try {
-                        argumentLine = input.trim().substring(simpleCommand.getCommand().length());
-                    } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-                        argumentLine = "";
-                    }
-                    return new RawCommandBuilder()
-                            .addCommand(simpleCommand.getCommand())
-                            .addCommandType(CommandTypes.SIMPLE_COMMAND)
-                            .addArgumentLine(argumentLine)
-                            .toRawCommand();
-                } catch (IllegalArgumentException illegalArgumentException) {
-                    try {
-                        complexCommand = ComplexCommands.valueOf(validCommand.getCommand().toUpperCase(Locale.ROOT));
-                        try {
-                            argumentLine = input.trim().substring(complexCommand.getCommand().length());
-                        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-                            argumentLine = "";
-                        }
-                        return new RawCommandBuilder()
-                                .addCommand(complexCommand.getCommand())
-                                .addCommandType(CommandTypes.COMPLEX_COMMAND)
-                                .addArgumentLine(argumentLine)
-                                .toRawCommand();
-                    } catch (IllegalArgumentException illegalArgumentException1) {
-                        return new RawCommandBuilder()
-                                .addCommand(Commands.NOP.getCommand())
-                                .addCommandType(CommandTypes.SIMPLE_COMMAND)
-                                .addArgumentLine("")
-                                .toRawCommand();
+                        throw new NoSuchCommandException("\"" + input.trim().split("\\s+?")[0] + "\" is not a valid command");
                     }
                 }
             }
         }
+    }
+
+    public String getArgumentLine(String input, String commandName) {
+        if (input.trim().length() < commandName.length()) {
+            return "";
+        } else {
+            return input.trim().substring(commandName.length());
+        }
+    }
+
+    public CommandRecord createCommandRecord(String commandName, String argumentLine, CommandHashMap validCommands) {
+        AbstractCommand command = validCommands.getCommandRecord(commandName).getCommand().clone();
+        Collections.addAll(command.getArguments(), argumentLine.trim().split("\\s+?"));
+        return new CommandRecord(command, validCommands.getCommandRecord(commandName).getCommandType());
     }
 }

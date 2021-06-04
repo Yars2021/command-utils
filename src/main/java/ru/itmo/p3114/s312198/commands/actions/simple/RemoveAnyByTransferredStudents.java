@@ -52,4 +52,13 @@ public class RemoveAnyByTransferredStudents extends AbstractCommand implements C
             }
         }
     }
+
+    @Override
+    public AbstractCommand clone() {
+        RemoveAnyByTransferredStudents commandClone = new RemoveAnyByTransferredStudents();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
+    }
 }

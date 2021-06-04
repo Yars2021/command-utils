@@ -12,6 +12,10 @@ public class Message extends AbstractCommand {
         super("msg", "<message>", "Prints a message");
     }
 
+    public void setArgument(String argument) {
+        arguments.add(argument);
+    }
+
     @Override
     public CommandResult execute() {
         ArrayList<String> output = new ArrayList<>();
@@ -19,5 +23,14 @@ public class Message extends AbstractCommand {
             output.add(arguments.stream().map(arg -> arg + " ").collect(Collectors.joining()));
         }
         return new CommandResult(Status.OK, output);
+    }
+
+    @Override
+    public AbstractCommand clone() {
+        Message commandClone = new Message();
+        commandClone.setArguments(arguments);
+        commandClone.setOwner(owner);
+        commandClone.setTarget(target);
+        return commandClone;
     }
 }
