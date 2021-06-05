@@ -46,35 +46,39 @@ public class ScriptFileReader implements AutoCloseable {
         }
     }
 
-    public ArrayList<AbstractCommand> readCommands(CommandHashMap validCommands) throws IOException {
-        ArrayList<String> lines = new ArrayList<>(Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8));
-        ArrayList<AbstractCommand> commands = new ArrayList<>();
-        CommandParser commandParser = new CommandParser();
-        for (Integer current = 0; current < lines.size(); current++) {
-            if (lines.get(current) != null) {
-                try {
-                    String commandName = commandParser.parseCommandName(lines.get(current), validCommands);
-                    String argumentLine = commandParser.getArgumentLine(lines.get(current), commandName);
-                    CommandRecord commandRecord = commandParser.createCommandRecord(commandName, argumentLine, validCommands);
-                    if (commandRecord.getCommandType() == CommandTypes.COMPLEX_COMMAND) {
-                        try {
-                            AbstractComplexCommand complexCommand = (AbstractComplexCommand) commandRecord.getCommand();
-                            StudyGroupPair studyGroupPair = new ComplexArgumentParser().parseLinesIntoStudyGroup(lines, current + 1);
-                            complexCommand.setComplexArgument(studyGroupPair.getStudyGroup());
-                            current += studyGroupPair.getSkipped();
-                        } catch (InvalidFileFormatException | InvalidInputException exception) {
-                            continue;
+    public ArrayList<AbstractCommand> readCommands(CommandHashMap validCommands) throws IOException, InvalidFileException {
+        if (path == null) {
+            throw new InvalidFileException("Invalid path, unable to read");
+        } else {
+            ArrayList<String> lines = new ArrayList<>(Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8));
+            ArrayList<AbstractCommand> commands = new ArrayList<>();
+            CommandParser commandParser = new CommandParser();
+            for (Integer current = 0; current < lines.size(); current++) {
+                if (lines.get(current) != null) {
+                    try {
+                        String commandName = commandParser.parseCommandName(lines.get(current), validCommands);
+                        String argumentLine = commandParser.getArgumentLine(lines.get(current), commandName);
+                        CommandRecord commandRecord = commandParser.createCommandRecord(commandName, argumentLine, validCommands);
+                        if (commandRecord.getCommandType() == CommandTypes.COMPLEX_COMMAND) {
+                            try {
+                                AbstractComplexCommand complexCommand = (AbstractComplexCommand) commandRecord.getCommand();
+                                StudyGroupPair studyGroupPair = new ComplexArgumentParser().parseLinesIntoStudyGroup(lines, current + 1);
+                                complexCommand.setComplexArgument(studyGroupPair.getStudyGroup());
+                                current += studyGroupPair.getSkipped();
+                            } catch (InvalidFileFormatException | InvalidInputException exception) {
+                                continue;
+                            }
                         }
+                        commands.add(commandRecord.getCommand());
+                    } catch (NoSuchCommandException noSuchCommandException) {
+                        Message message = new Message();
+                        message.setArgument(noSuchCommandException.getMessage());
+                        commands.add(message);
                     }
-                    commands.add(commandRecord.getCommand());
-                } catch (NoSuchCommandException noSuchCommandException) {
-                    Message message = new Message();
-                    message.setArgument(noSuchCommandException.getMessage());
-                    commands.add(message);
                 }
             }
+            return commands;
         }
-        return commands;
     }
 
     @Override
