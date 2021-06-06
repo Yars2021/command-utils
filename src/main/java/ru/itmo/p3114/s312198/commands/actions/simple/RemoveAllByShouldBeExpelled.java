@@ -51,8 +51,9 @@ public class RemoveAllByShouldBeExpelled extends AbstractCommand implements Coll
 
     @Override
     public AbstractCommand clone() {
+        ArrayList<String> cloneArguments = new ArrayList<>(arguments);
         RemoveAllByShouldBeExpelled commandClone = new RemoveAllByShouldBeExpelled();
-        commandClone.setArguments(arguments);
+        commandClone.setArguments(cloneArguments);
         commandClone.setOwner(owner);
         commandClone.setTarget(target);
         return commandClone;

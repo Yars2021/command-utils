@@ -39,8 +39,9 @@ public class Info extends AbstractCommand implements CollectionInteracting {
 
     @Override
     public AbstractCommand clone() {
+        ArrayList<String> cloneArguments = new ArrayList<>(arguments);
         Info commandClone = new Info();
-        commandClone.setArguments(arguments);
+        commandClone.setArguments(cloneArguments);
         commandClone.setOwner(owner);
         commandClone.setTarget(target);
         return commandClone;

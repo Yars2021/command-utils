@@ -31,8 +31,9 @@ public class Help extends AbstractCommand {
 
     @Override
     public AbstractCommand clone() {
+        ArrayList<String> cloneArguments = new ArrayList<>(arguments);
         Help commandClone = new Help();
-        commandClone.setArguments(arguments);
+        commandClone.setArguments(cloneArguments);
         commandClone.setOwner(owner);
         commandClone.setTarget(target);
         return commandClone;

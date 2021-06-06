@@ -29,10 +29,10 @@ public class CommandParser {
     }
 
     public String getArgumentLine(String input, String commandName) {
-        if (input.trim().length() < commandName.length()) {
+        if (input == null || commandName == null || input.trim().length() < commandName.length()) {
             return "";
         } else {
-            return input.trim().substring(commandName.length());
+            return input.trim().substring(commandName.length()).trim();
         }
     }
 

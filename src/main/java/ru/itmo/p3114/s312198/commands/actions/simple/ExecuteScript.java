@@ -19,8 +19,9 @@ public class ExecuteScript extends AbstractCommand {
 
     @Override
     public AbstractCommand clone() {
+        ArrayList<String> cloneArguments = new ArrayList<>(arguments);
         ExecuteScript commandClone = new ExecuteScript();
-        commandClone.setArguments(arguments);
+        commandClone.setArguments(cloneArguments);
         commandClone.setOwner(owner);
         commandClone.setTarget(target);
         return commandClone;

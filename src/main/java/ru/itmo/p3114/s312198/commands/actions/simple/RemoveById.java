@@ -49,8 +49,9 @@ public class RemoveById extends AbstractCommand implements CollectionInteracting
 
     @Override
     public AbstractCommand clone() {
+        ArrayList<String> cloneArguments = new ArrayList<>(arguments);
         RemoveById commandClone = new RemoveById();
-        commandClone.setArguments(arguments);
+        commandClone.setArguments(cloneArguments);
         commandClone.setOwner(owner);
         commandClone.setTarget(target);
         return commandClone;

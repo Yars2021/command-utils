@@ -23,6 +23,14 @@ public class ConsoleReader implements AutoCloseable {
         }
     }
 
+    public String flexibleConsoleReadLine() throws IOException {
+        try {
+            return readConsoleLine();
+        } catch (ConsoleException consoleException) {
+            return readLine();
+        }
+    }
+
     public String readConsolePassword() throws ConsoleException {
         if (console == null) {
             throw new ConsoleException("No console found");

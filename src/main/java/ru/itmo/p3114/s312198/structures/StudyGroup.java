@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class StudyGroup implements Serializable, CSVConvertible {
+public class StudyGroup implements Comparable<StudyGroup>, Serializable, CSVConvertible {
     private Long id;
     private Long creatorId;
     private String name;
@@ -88,6 +88,17 @@ public class StudyGroup implements Serializable, CSVConvertible {
 
     public void setGroupAdmin(Person groupAdmin) {
         this.groupAdmin = groupAdmin;
+    }
+
+    public void setAllAccessibleFields(StudyGroup studyGroup) {
+        setName(studyGroup.name);
+        setCoordinates(studyGroup.coordinates);
+        setCreationDate(studyGroup.creationDate);
+        setStudentsCount(studyGroup.studentsCount);
+        setShouldBeExpelled(studyGroup.shouldBeExpelled);
+        setTransferredStudents(studyGroup.transferredStudents);
+        setFormOfEducation(studyGroup.formOfEducation);
+        setGroupAdmin(studyGroup.groupAdmin);
     }
 
     public Long getId() {
@@ -213,5 +224,18 @@ public class StudyGroup implements Serializable, CSVConvertible {
                 "\tTransferred students: " + (transferredStudents == null ? "-" : transferredStudents) + "\n" +
                 "\tForm of education: " + (formOfEducation == null ? "-" : formOfEducation) + "\n" +
                 "\tGroup admin: " + (groupAdmin == null ? "-" : "\n" + groupAdmin.toReadableShiftedString());
+    }
+
+    @Override
+    public int compareTo(StudyGroup o) {
+        if (o == null) {
+            return 1;
+        } else {
+            if (o == this) {
+                return 0;
+            } else {
+                return name.compareTo(o.name);
+            }
+        }
     }
 }

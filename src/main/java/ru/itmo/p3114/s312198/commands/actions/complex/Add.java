@@ -49,10 +49,16 @@ public class Add extends AbstractComplexCommand implements CollectionInteracting
     }
 
     @Override
+    public Boolean canExecute() {
+        return Boolean.TRUE;
+    }
+
+    @Override
     public AbstractCommand clone() {
+        ArrayList<String> cloneArguments = new ArrayList<>(arguments);
         Add commandClone = new Add();
         commandClone.setComplexArgument(complexArgument);
-        commandClone.setArguments(arguments);
+        commandClone.setArguments(cloneArguments);
         commandClone.setOwner(owner);
         commandClone.setTarget(target);
         return commandClone;

@@ -40,7 +40,7 @@ public class CommandHashMap {
     public ArrayList<String> getDocumentation() {
         ArrayList<String> documentation = new ArrayList<>();
         for (String commandName : commandMap.keySet()) {
-            documentation.add((commandMap.get(commandName).getCommand().getCommand() +
+            documentation.add((commandMap.get(commandName).getCommand().getCommandName() +
                     " " + commandMap.get(commandName).getCommand().getInputPattern()).trim() +
                     ": " + commandMap.get(commandName).getCommand().getDocumentation());
         }

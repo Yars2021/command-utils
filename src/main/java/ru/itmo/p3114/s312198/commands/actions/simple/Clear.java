@@ -35,8 +35,9 @@ public class Clear extends AbstractCommand implements CollectionInteracting, Dat
 
     @Override
     public AbstractCommand clone() {
+        ArrayList<String> cloneArguments = new ArrayList<>(arguments);
         Clear commandClone = new Clear();
-        commandClone.setArguments(arguments);
+        commandClone.setArguments(cloneArguments);
         commandClone.setOwner(owner);
         commandClone.setTarget(target);
         return commandClone;

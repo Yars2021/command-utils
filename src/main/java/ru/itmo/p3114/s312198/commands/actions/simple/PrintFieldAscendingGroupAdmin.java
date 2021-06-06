@@ -32,8 +32,9 @@ public class PrintFieldAscendingGroupAdmin extends AbstractCommand implements Co
 
     @Override
     public AbstractCommand clone() {
+        ArrayList<String> cloneArguments = new ArrayList<>(arguments);
         PrintFieldAscendingGroupAdmin commandClone = new PrintFieldAscendingGroupAdmin();
-        commandClone.setArguments(arguments);
+        commandClone.setArguments(cloneArguments);
         commandClone.setOwner(owner);
         commandClone.setTarget(target);
         return commandClone;

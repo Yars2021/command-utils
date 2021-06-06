@@ -12,6 +12,7 @@ import ru.itmo.p3114.s312198.structures.builders.LocationBuilder;
 import ru.itmo.p3114.s312198.structures.builders.PersonBuilder;
 import ru.itmo.p3114.s312198.structures.builders.StudyGroupBuilder;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ComplexArgumentParser {
@@ -76,6 +77,7 @@ public class ComplexArgumentParser {
                 return new StudyGroupPair(new StudyGroupBuilder()
                         .addName(fieldParser.parseName(lines.get(startingPoint)))
                         .addCoordinates(fieldParser.parseCoordinates(lines.get(startingPoint + 1)))
+                        .addCreationDate(LocalDate.now())
                         .addStudentsCount(fieldParser.parseNaturalNumber(lines.get(startingPoint + 2)))
                         .addShouldBeExpelled(fieldParser.parseCappedNaturalNumber(lines.get(startingPoint + 3),
                                 fieldParser.parseNaturalNumber(lines.get(startingPoint + 2))))

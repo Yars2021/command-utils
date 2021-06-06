@@ -15,6 +15,7 @@ import ru.itmo.p3114.s312198.structures.builders.PersonBuilder;
 import ru.itmo.p3114.s312198.structures.builders.StudyGroupBuilder;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class RequestParser {
     public String requestUserInput(String message, ConsoleReader consoleReader) throws IOException {
@@ -199,6 +200,7 @@ public class RequestParser {
         return new StudyGroupBuilder()
                 .addName(name)
                 .addCoordinates(coordinates)
+                .addCreationDate(LocalDate.now())
                 .addStudentsCount(studentsCount)
                 .addShouldBeExpelled(shouldBeExpelled)
                 .addTransferredStudents(transferredStudents)

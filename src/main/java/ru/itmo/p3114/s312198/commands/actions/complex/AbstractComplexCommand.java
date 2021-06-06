@@ -17,4 +17,6 @@ abstract public class AbstractComplexCommand extends AbstractCommand {
     public StudyGroup getComplexArgument() {
         return complexArgument;
     }
+
+    abstract public Boolean canExecute();
 }

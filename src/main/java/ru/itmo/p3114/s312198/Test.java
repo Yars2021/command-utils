@@ -1,8 +1,6 @@
 package ru.itmo.p3114.s312198;
 
 import ru.itmo.p3114.s312198.commands.CommandHashMap;
-import ru.itmo.p3114.s312198.commands.actions.AbstractCommand;
-import ru.itmo.p3114.s312198.commands.actions.complex.AbstractComplexCommand;
 import ru.itmo.p3114.s312198.commands.actions.complex.Add;
 import ru.itmo.p3114.s312198.commands.actions.complex.AddIfMax;
 import ru.itmo.p3114.s312198.commands.actions.complex.RemoveGreater;
@@ -22,11 +20,8 @@ import ru.itmo.p3114.s312198.commands.actions.simple.RemoveAnyByTransferredStude
 import ru.itmo.p3114.s312198.commands.actions.simple.RemoveById;
 import ru.itmo.p3114.s312198.commands.actions.simple.Show;
 import ru.itmo.p3114.s312198.commands.types.CommandTypes;
-import ru.itmo.p3114.s312198.io.ScriptFileReader;
-import ru.itmo.p3114.s312198.parsers.ComplexArgumentParser;
-
-import java.io.IOException;
-import java.util.ArrayList;
+import ru.itmo.p3114.s312198.exceptions.InitializationException;
+import ru.itmo.p3114.s312198.managers.ConsoleManager;
 
 public class Test {
     public static void main(String[] args) {
@@ -50,20 +45,12 @@ public class Test {
         commandHashMap.addCommandRecord("add_if_max", CommandTypes.COMPLEX_COMMAND, new AddIfMax());
         commandHashMap.addCommandRecord("remove_greater", CommandTypes.COMPLEX_COMMAND, new RemoveGreater());
 
+        ConsoleManager consoleManager = new ConsoleManager(commandHashMap);
+        consoleManager.autoInitialize();
         try {
-            ScriptFileReader scriptFileReader = new ScriptFileReader("test.txt");
-            for (AbstractCommand command : scriptFileReader.readCommands(commandHashMap)) {
-                System.out.println(command.getCommand() + ": ");
-                for (String argument : command.getArguments()) {
-                    System.out.println("\t" + argument);
-                }
-                if (commandHashMap.getCommandRecord(command.getCommand()).getCommandType() == CommandTypes.COMPLEX_COMMAND) {
-                    System.out.println(((AbstractComplexCommand) command).getComplexArgument().toReadableString());
-                }
-                System.out.println();
-            }
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+            consoleManager.runBy("Yars");
+        } catch (InitializationException initializationException) {
+            initializationException.printStackTrace();
         }
     }
 }

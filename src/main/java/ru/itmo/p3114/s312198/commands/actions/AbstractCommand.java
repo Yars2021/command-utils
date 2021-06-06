@@ -45,7 +45,7 @@ abstract public class AbstractCommand implements Serializable {
         return owner;
     }
 
-    public String getCommand() {
+    public String getCommandName() {
         return command;
     }
 
