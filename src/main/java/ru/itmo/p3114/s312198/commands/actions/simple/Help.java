@@ -25,7 +25,7 @@ public class Help extends AbstractCommand {
             output.add("No command map found");
             return new CommandResult(Status.FAILED, output);
         } else {
-            return new CommandResult(Status.OK, commandHashMap.getDocumentation());
+            return new CommandResult(Status.OK, commandHashMap.getDescriptionList());
         }
     }
 

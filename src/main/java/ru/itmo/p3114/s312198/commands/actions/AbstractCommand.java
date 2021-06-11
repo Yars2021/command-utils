@@ -10,15 +10,15 @@ import java.util.LinkedHashSet;
 abstract public class AbstractCommand implements Serializable {
     protected String command;
     protected String inputPattern;
-    protected String documentation;
+    protected String description;
     protected ArrayList<String> arguments = new ArrayList<>();
     protected LinkedHashSet<StudyGroup> target;
     protected String owner;
 
-    public AbstractCommand(String command, String inputPattern, String documentation) {
+    public AbstractCommand(String command, String inputPattern, String description) {
         this.command = command;
         this.inputPattern = inputPattern;
-        this.documentation = documentation;
+        this.description = description;
     }
 
     public void setArguments(ArrayList<String> arguments) {
@@ -53,8 +53,8 @@ abstract public class AbstractCommand implements Serializable {
         return inputPattern;
     }
 
-    public String getDocumentation() {
-        return documentation;
+    public String getDescription() {
+        return description;
     }
 
     abstract public CommandResult execute();

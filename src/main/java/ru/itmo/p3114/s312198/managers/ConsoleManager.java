@@ -22,11 +22,11 @@ import ru.itmo.p3114.s312198.structures.StudyGroup;
 import java.io.IOException;
 
 public class ConsoleManager {
-    private final SynchronizedCollectionManager synchronizedCollectionManager = new SynchronizedCollectionManager();
-    private final CommandExecutor commandExecutor = new CommandExecutor(synchronizedCollectionManager);
-    private final HistoryManager historyManager = new HistoryManager(5);
-    private final CommandHashMap validCommands;
-    private ConsoleReader consoleReader;
+    protected final SynchronizedCollectionManager synchronizedCollectionManager = new SynchronizedCollectionManager();
+    protected final CommandExecutor commandExecutor = new CommandExecutor(synchronizedCollectionManager);
+    protected final HistoryManager historyManager = new HistoryManager(5);
+    protected final CommandHashMap validCommands;
+    protected ConsoleReader consoleReader;
     private volatile Boolean running;
     private volatile Boolean waiting;
 
@@ -71,7 +71,6 @@ public class ConsoleManager {
         }
     }
 
-    //todo Change actorName to an actual actor (instance of User)
     public void runBy(String actorName) throws InitializationException {
         if (consoleReader == null || validCommands == null) {
             throw new InitializationException("Console manager was not initialized");

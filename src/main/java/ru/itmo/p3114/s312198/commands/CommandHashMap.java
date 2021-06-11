@@ -37,13 +37,13 @@ public class CommandHashMap {
         return commands;
     }
 
-    public ArrayList<String> getDocumentation() {
-        ArrayList<String> documentation = new ArrayList<>();
+    public ArrayList<String> getDescriptionList() {
+        ArrayList<String> descriptionList = new ArrayList<>();
         for (String commandName : commandMap.keySet()) {
-            documentation.add((commandMap.get(commandName).getCommand().getCommandName() +
+            descriptionList.add((commandMap.get(commandName).getCommand().getCommandName() +
                     " " + commandMap.get(commandName).getCommand().getInputPattern()).trim() +
-                    ": " + commandMap.get(commandName).getCommand().getDocumentation());
+                    ": " + commandMap.get(commandName).getCommand().getDescription());
         }
-        return documentation;
+        return descriptionList;
     }
 }

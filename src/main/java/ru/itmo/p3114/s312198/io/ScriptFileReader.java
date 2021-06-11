@@ -38,12 +38,16 @@ public class ScriptFileReader implements AutoCloseable {
                 this.path = path;
             } catch (FileNotFoundException fileNotFoundException) {
                 if (file.isDirectory()) {
-                    throw new InvalidFileException(path + " is a directory");
+                    throw new InvalidFileException("\"" + path + "\" is a directory");
                 } else {
-                    throw new InvalidFileException(path + " does not exist");
+                    throw new InvalidFileException("\"" + path + "\" does not exist");
                 }
             }
         }
+    }
+
+    public String getPath() {
+        return path;
     }
 
     public ArrayList<AbstractCommand> readCommands(CommandHashMap validCommands) throws IOException, InvalidFileException {
@@ -66,7 +70,10 @@ public class ScriptFileReader implements AutoCloseable {
                                 complexCommand.setComplexArgument(studyGroupPair.getStudyGroup());
                                 current += studyGroupPair.getSkipped();
                             } catch (InvalidFileFormatException | InvalidInputException exception) {
-                                continue;
+                                Message message = new Message();
+                                message.setArgument("Invalid complex argument format in \"" +
+                                        commandRecord.getCommand().getCommandName() + "\" command");
+                                commandRecord = new CommandRecord(message, CommandTypes.SIMPLE_COMMAND);
                             }
                         }
                         commands.add(commandRecord.getCommand());
