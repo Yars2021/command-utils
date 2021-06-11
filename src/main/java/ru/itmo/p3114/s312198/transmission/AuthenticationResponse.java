@@ -11,7 +11,7 @@ public class AuthenticationResponse implements Serializable {
         this.serverMessage = serverMessage;
     }
 
-    public Boolean getAllowed() {
+    public Boolean allowed() {
         return allowed;
     }
 
