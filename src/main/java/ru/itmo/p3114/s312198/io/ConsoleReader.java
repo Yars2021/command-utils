@@ -42,6 +42,14 @@ public class ConsoleReader implements AutoCloseable {
         }
     }
 
+    public String flexibleConsoleReadPassword() throws IOException {
+        try {
+            return readConsolePassword();
+        } catch (ConsoleException consoleException) {
+            return readLine();
+        }
+    }
+
     @Override
     public void close() throws IOException {
         try {

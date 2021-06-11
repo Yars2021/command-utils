@@ -18,7 +18,7 @@ public class CSChannel implements AutoCloseable {
             outputStream = new ObjectOutputStream(socket.getOutputStream());
             inputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException ioException) {
-            throw (TransmissionException) ioException;
+            throw new TransmissionException(ioException.getMessage());
         }
     }
 
@@ -39,6 +39,7 @@ public class CSChannel implements AutoCloseable {
             outputStream.writeObject(object);
             outputStream.flush();
         } catch (IOException ioException) {
+            ioException.printStackTrace();
             throw new TransmissionException("Unable to write: " + ioException.getMessage());
         }
     }
@@ -47,7 +48,7 @@ public class CSChannel implements AutoCloseable {
         try {
             return inputStream.readObject();
         } catch (IOException ioException) {
-            throw new TransmissionException("Unable to write: " + ioException.getMessage());
+            throw new TransmissionException("Unable to read: " + ioException.getMessage());
         } catch (ClassNotFoundException classNotFoundException) {
             throw new TransmissionException("The data packet has been damaged");
         }
@@ -60,7 +61,7 @@ public class CSChannel implements AutoCloseable {
             socket.shutdownOutput();
             socket.close();
         } catch (IOException ioException) {
-            throw (TransmissionException) ioException;
+            throw new TransmissionException(ioException.getMessage());
         }
     }
 }

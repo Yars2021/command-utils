@@ -36,7 +36,6 @@ public class ConsoleManager {
 
     public void autoInitialize() {
         consoleReader = new ConsoleReader();
-        commandExecutor.initialize(consoleReader);
         synchronizedCollectionManager.autoInitialize();
         running = Boolean.TRUE;
         waiting = Boolean.FALSE;
@@ -44,7 +43,6 @@ public class ConsoleManager {
 
     public void initialize(ConsoleReader consoleReader) {
         autoInitialize();
-        commandExecutor.initialize(consoleReader);
     }
 
     public void shutdown() {

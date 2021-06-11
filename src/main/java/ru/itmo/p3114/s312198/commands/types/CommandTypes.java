@@ -1,6 +1,8 @@
 package ru.itmo.p3114.s312198.commands.types;
 
-public enum CommandTypes {
+import java.io.Serializable;
+
+public enum CommandTypes implements Serializable {
     SIMPLE_COMMAND,
     COMPLEX_COMMAND,
     AUTHENTICATION_COMMAND

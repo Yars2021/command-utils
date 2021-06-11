@@ -3,6 +3,7 @@ package ru.itmo.p3114.s312198.managers;
 import ru.itmo.p3114.s312198.commands.CommandHashMap;
 import ru.itmo.p3114.s312198.commands.CommandRecord;
 import ru.itmo.p3114.s312198.exceptions.InitializationException;
+import ru.itmo.p3114.s312198.exceptions.InputInterruptedException;
 import ru.itmo.p3114.s312198.exceptions.InvalidCommandException;
 import ru.itmo.p3114.s312198.exceptions.InvalidFileException;
 import ru.itmo.p3114.s312198.exceptions.NoSuchCommandException;
@@ -61,7 +62,11 @@ public class ClientConsoleManager extends ConsoleManager {
         if (consoleReader == null || validCommands == null) {
             throw new InitializationException("Console manager was not initialized");
         } else {
-            return new SecondaryPack(requestParser.requestStudyGroup(consoleReader), actor);
+            try {
+                return new SecondaryPack(requestParser.requestStudyGroup(consoleReader), actor);
+            } catch (InputInterruptedException inputInterruptedException) {
+                return null;
+            }
         }
     }
 

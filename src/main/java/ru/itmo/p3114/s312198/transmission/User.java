@@ -1,6 +1,8 @@
 package ru.itmo.p3114.s312198.transmission;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private final String username;
     private final String credentials;
     private final Long id;

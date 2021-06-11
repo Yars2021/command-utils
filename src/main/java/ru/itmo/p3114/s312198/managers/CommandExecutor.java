@@ -9,18 +9,9 @@ import ru.itmo.p3114.s312198.io.ConsoleReader;
 
 public class CommandExecutor {
     private final SynchronizedCollectionManager synchronizedCollectionManager;
-    private ConsoleReader consoleReader;
 
     public CommandExecutor(SynchronizedCollectionManager synchronizedCollectionManager) {
         this.synchronizedCollectionManager = synchronizedCollectionManager;
-    }
-
-    public void autoInitialize() {
-        consoleReader = new ConsoleReader();
-    }
-
-    public void initialize(ConsoleReader consoleReader) {
-        this.consoleReader = consoleReader;
     }
 
     public CommandResult executeCommand(AbstractCommand command) throws InvalidCommandException {

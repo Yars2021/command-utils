@@ -24,7 +24,7 @@ public class ResponsePack implements Serializable {
         return output;
     }
 
-    public Boolean getAllowed() {
+    public Boolean allowed() {
         return allowed;
     }
 }
