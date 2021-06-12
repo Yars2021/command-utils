@@ -8,7 +8,7 @@ import ru.itmo.p3114.s312198.exceptions.InvalidCommandException;
 import ru.itmo.p3114.s312198.io.ConsoleReader;
 
 public class CommandExecutor {
-    private final SynchronizedCollectionManager synchronizedCollectionManager;
+    protected final SynchronizedCollectionManager synchronizedCollectionManager;
 
     public CommandExecutor(SynchronizedCollectionManager synchronizedCollectionManager) {
         this.synchronizedCollectionManager = synchronizedCollectionManager;

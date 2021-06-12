@@ -21,8 +21,12 @@ public enum FormOfEducation implements Serializable {
         this.key = key;
     }
 
-    public FormOfEducation valueOf(Long key) {
+    public static FormOfEducation valueOf(Long key) {
         return values.get(key);
+    }
+
+    public Long getKey() {
+        return key;
     }
 
     public static String getValString() {

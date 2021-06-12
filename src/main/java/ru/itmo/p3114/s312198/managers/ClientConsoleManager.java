@@ -2,6 +2,7 @@ package ru.itmo.p3114.s312198.managers;
 
 import ru.itmo.p3114.s312198.commands.CommandHashMap;
 import ru.itmo.p3114.s312198.commands.CommandRecord;
+import ru.itmo.p3114.s312198.commands.actions.simple.Help;
 import ru.itmo.p3114.s312198.exceptions.InitializationException;
 import ru.itmo.p3114.s312198.exceptions.InputInterruptedException;
 import ru.itmo.p3114.s312198.exceptions.InvalidCommandException;

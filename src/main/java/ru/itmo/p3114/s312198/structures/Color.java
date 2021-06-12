@@ -22,8 +22,12 @@ public enum Color implements Serializable {
         this.key = key;
     }
 
-    public Color valueOf(Long key) {
+    public static Color valueOf(Long key) {
         return values.get(key);
+    }
+
+    public Long getKey() {
+        return key;
     }
 
     public static String getValString() {

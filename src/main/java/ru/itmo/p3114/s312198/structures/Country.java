@@ -29,8 +29,12 @@ public enum Country implements Serializable {
         this.key = key;
     }
 
-    public Country valueOf(Long key) {
+    public static Country valueOf(Long key) {
         return values.get(key);
+    }
+
+    public Long getKey() {
+        return key;
     }
 
     public static String getValString() {

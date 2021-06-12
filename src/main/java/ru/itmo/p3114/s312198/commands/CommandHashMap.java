@@ -3,10 +3,11 @@ package ru.itmo.p3114.s312198.commands;
 import ru.itmo.p3114.s312198.commands.actions.AbstractCommand;
 import ru.itmo.p3114.s312198.commands.types.CommandTypes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CommandHashMap {
+public class CommandHashMap implements Serializable {
     private final HashMap<String, CommandRecord> commandMap = new HashMap<>();
     private final ArrayList<AbstractCommand> commands = new ArrayList<>();
 
