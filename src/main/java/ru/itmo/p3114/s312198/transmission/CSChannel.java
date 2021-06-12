@@ -39,7 +39,6 @@ public class CSChannel implements AutoCloseable {
             outputStream.writeObject(object);
             outputStream.flush();
         } catch (IOException ioException) {
-            ioException.printStackTrace();
             throw new TransmissionException("Unable to write: " + ioException.getMessage());
         }
     }
